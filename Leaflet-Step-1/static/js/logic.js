@@ -6,11 +6,17 @@ d3.json(queryUrl).then(function (data) {
     
 });
 
-function onEachFeature(feature, layer) {
-    layer.bindPopup("<h3>" + feature.properties.place +
-      "</h3><hr><p>" + new Date(feature.properties.time) + "</p>");
-  }
+function createFeatures(earthquakeData) {
 
+    function onEachFeature(feature, layer) {
+      layer.bindPopup("<h3>" + feature.properties.place +
+        "</h3><hr><p>" + new Date(feature.properties.time) + "</p>");
+    }
+  
+  
+    var earthquakes = L.geoJSON(earthquakeData, {
+      onEachFeature: onEachFeature
+    });
 
 function createMap(earthquakes) {
     var street = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {

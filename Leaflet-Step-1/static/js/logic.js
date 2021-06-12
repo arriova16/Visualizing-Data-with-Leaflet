@@ -3,7 +3,7 @@ var queryUrl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_we
 d3.json(queryUrl).then(function (data) {
 
     function chooseColor(magnitude) {
-    switch (magnitude) {
+    switch (true) {
         case magnitude > 5:
             return "#ea2c2c";
         case magnitude > 4:

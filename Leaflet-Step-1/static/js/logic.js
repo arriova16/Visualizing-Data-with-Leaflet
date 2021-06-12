@@ -5,25 +5,22 @@ d3.json(queryUrl).then(function (data) {
     function chooseColor(magnitude) {
     switch (true) {
         case magnitude > 5:
-            return "#ea2c2c";
+            return "#ff5f65";
         case magnitude > 4:
-            return "#ea822c";
+            return "#fe8d46";
         case magnitude > 3:
-            return "#ee9c00";
+            return "#fbb22d";
         case magnitude > 2:
-            return "#eecc00";
+            return "#f7dc11";
         case magnitude > 1:
-            return "#d4ee00";
+            return "#dcf400";
         default:
-            return "#98ee00";
+            return "#a4f600";
         } 
     }
-    function getRadius(magnitude) {
-        if (magnitude == 0) {
-            return 1;
-     }
-     return magnitude *4;
-    }
+    function markerSize(magnitude) {
+     return magnitude * 4;
+    };
 
     function styleFormat(feature) {
         return {
@@ -31,7 +28,7 @@ d3.json(queryUrl).then(function (data) {
             fillOpacity: 1,
             fillColor: chooseColor(feature.properties.mag),
             color: "#000000",
-            radius: getRadius(feature.properties.mag),
+            radius: markerSize(feature.properties.mag),
             stroke: true,
             weight: 0.5
         }
@@ -43,7 +40,7 @@ d3.json(queryUrl).then(function (data) {
         },
     style: styleFormat,
     onEachFeature: function(feature,layer) {
-        layer.bindPopup("Magnitude: " + feature.properties.mag + "<br>Location: " + feature.properties.place);
+        layer.bindPopup("Magnitude: " + feature.properties.mag + "<br>Location: " + feature.properties.mag);
     }
     });
     createMap(earthquakeLayer);
@@ -80,4 +77,34 @@ d3.json(queryUrl).then(function (data) {
         L.control.layers(baseMaps, overlayMaps, {
             collapsed: false
         }).addTo(myMap);
+
+        // var legend = L.control({ position: "bottomright" });
+        // legend.onAdd = function() {
+        //   var div = L.DomUtil.create("div", "info legend");
+        //   var limits = geojson.options.limits;
+        //   var colors = geojson.options.colors;
+        //   var labels = [];
+      
+        //   // Add the minimum and maximum.
+        //   var legendInfo = "<h1>Median Income</h1>" +
+        //     "<div class=\"labels\">" +
+        //       "<div class=\"min\">" + limits[0] + "</div>" +
+        //       "<div class=\"max\">" + limits[limits.length - 1] + "</div>" +
+        //     "</div>";
+      
+        //   div.innerHTML = legendInfo;
+      
+        //   limits.forEach(function(limit, index) {
+        //     labels.push("<li style=\"background-color: " + colors[index] + "\"></li>");
+        //   });
+      
+        //   div.innerHTML += "<ul>" + labels.join("") + "</ul>";
+        //   return div;
+        // };
+      
+        // // Adding the legend to the map
+        // legend.addTo(myMap);
+      
+    
+      
 }

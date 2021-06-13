@@ -82,18 +82,17 @@ d3.json(queryUrl).then(function (data) {
 
     var legend = L.control({ position: "bottomleft" });
                 
-    legend.onAdd = function() {
+    legend.onAdd = function(map) {
         
-        var div = L.DomUtil.create("div", "info legend");
-
-        var limits = ["6", "5", "4", "3", "2","1"];
-        var colors = ["#ff5f65", "#fe8d46", "#fbb22d", "#f7dc11",  "#dcf400", "#a4f600"]
-        
-
-      for (var i=0; i<limits.length; i++) {
-          div.innerHTML +=
-          "<i style = 'background: " + colors[i] + "'></1> " + limits[i] + (limits[i+1] ? "&ndash;" + limits[i + 1] + "<br>" : "+")
-      }
+    var div = L.DomUtil.create("div", "info legend");
+    div.innerHTML += "<h4>Earthquake Magnitude</h4>";
+    div.innerHTML += '<span><i class="bi bi-circle-fill" style="color: #648FFF"></i> &nbsp;&nbsp; &lt; 1 </span><br>';
+    div.innerHTML += '<span><i class="bi bi-circle-fill" style="color: #785EF0"></i> &nbsp;&nbsp; 1 - 2</span><br>';
+    div.innerHTML += '<span><i class="bi bi-circle-fill" style="color: #DC267F"></i> &nbsp;&nbsp; 3 - 4</span><br>';
+    div.innerHTML += '<span><i class="bi bi-circle-fill" style="color: #FE6100"></i> &nbsp;&nbsp; 4 - 5</span><br>';
+    div.innerHTML += '<span><i class="bi bi-circle-fill" style="color: #FFB000"></i> &nbsp;&nbsp; 6 +</span><br>';
+    
+       
   
         
   return div;

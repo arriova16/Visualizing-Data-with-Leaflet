@@ -70,7 +70,7 @@ d3.json(queryUrl).then(function (data) {
             center: [
             37.09, -95.71
             ],
-            zoom: 5,
+            zoom: 4,
             layers: [street, earthquakes]
         });
 
@@ -78,5 +78,33 @@ d3.json(queryUrl).then(function (data) {
             collapsed: false
         }).addTo(myMap);
 
+
+
+    var legend = L.control({ position: "bottomleft" });
+                
+    legend.onAdd = function() {
+        
+        var div = L.DomUtil.create("div", "info legend");
+
+        var limits = ["6", "5", "4", "3", "2","1"];
+        var colors = ["#ff5f65", "#fe8d46", "#fbb22d", "#f7dc11",  "#dcf400", "#a4f600"]
+        
+
+      for (var i=0; i<limits.length; i++) {
+          div.innerHTML +=
+          "<i style = 'background: " + colors[i] + "'></1> " + limits[i] + (limits[i+1] ? "&ndash;" + limits[i + 1] + "<br>" : "+")
+      }
+  
+        
+  return div;
+    };
+      
+        // Adding the legend to the map
+        legend.addTo(myMap);
+      
+    
       
 }
+
+
+  
